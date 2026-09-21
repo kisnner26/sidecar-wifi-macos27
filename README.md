@@ -2,7 +2,11 @@
 
 # sidecar-wifi-macos27
 
+**[english version](README.en.md)**
+
 por qué sidecar decía que el wi-fi del ipad no estaba disponible, con el wi-fi perfecto. **resuelto.**
+
+el error, tal cual: *«no se puede conectar a "ipad"»* / *«sidecar can't connect wirelessly because your ipad's wi-fi is not available. to use sidecar wirelessly, turn on wi-fi and make sure it is not in use for personal hotspot»*. en el registro: `SidecarErrorDomain Code=-203 "SidecarErrorDeviceWiFiNotEnabled"`. por cable sí funciona.
 
 <sub>captura real del error, en un macbook pro con macos 27.2 y un ipad pro con ipados 27.</sub>
 
