@@ -21,6 +21,32 @@ Encountered unrecoverable error: SidecarErrorDomain Code=-203 "SidecarErrorDevic
 
 reproducible en cada intento (se probaron al menos 6).
 
+## cronología de pruebas
+
+horas locales, 6 y 7 de septiembre. cada fila es una prueba y lo que se midió.
+
+| hora | prueba | resultado |
+|---|---|---|
+| 23:46 | primer intento, sin cable | `-203`; el ipad anuncia `BLE DuetSync Owner ApplePay PairingMode`, sin `WiFiP2P` |
+| 23:49 | segundo intento | `-203`, mismas banderas |
+| 00:30 | se conecta el cable usb | sidecar **funciona**; banderas pasan a `BLE iWiFi ... USB ...`; `WiFiP2P` sigue en 0 durante 20 min de sesión activa |
+| 00:35 | se desconecta el cable, 3 reintentos (00:35:07, :39, :59) | `-203` las tres veces; el ipad vuelve a anunciar cero capacidades wi-fi |
+| 00:42 | se compara la banda de wi-fi | mac y ipad ambos en 2.4 ghz (el mac había estado en 5 ghz minutos antes); señal débil, -72 dbm; el error no cambia |
+| 00:45 | compartir internet del ipad reportado activado, luego apagado | 28 anuncios idénticos en 4 min, `WiFiP2P: 0`, `iWiFi: 0`, `AirDropUsable: 0` |
+| 00:47 | restablecer ajustes de red en el ipad | 124 anuncios en 6 min (se re-registra), `AirDropUsable: 2`, `WiFiP2P` y `iWiFi` siguen en 0 |
+| 00:49 y 00:54 | nuevos intentos | `-203`; ahora el mac tampoco ve la bandera `USB` |
+| 00:55 | se revisa el cable | finder ve el ipad tras confiar de nuevo, pero `en9` queda huérfana y no hay servicio "ipad usb" |
+| 00:59 | estado final | wi-fi del mac on y conectado; ipad en `USB: 0`, `iWiFi: 0`, `WiFiP2P: 0`; la sesión termina proponiendo reiniciar ambos |
+
+## qué se descubrió probando
+
+1. **por cable funciona sin `WiFiP2P`.** sidecar por usb no necesita el canal peer-to-peer, así que el stack completo (apple id, emparejamiento, video) está bien. el fallo es solo del transporte inalámbrico.
+2. **el ipad nunca ofrece `WiFiP2P`**, ni antes ni después de apagar compartir internet, cambiar de banda o restablecer la red.
+3. **conectado por cable el ipad sí anuncia `iWiFi`; desconectado no.** desconectado no anuncia ninguna capacidad wi-fi, aunque en ajustes se vea unido a la red.
+4. **el error de macos es literal.** `SidecarErrorDeviceWiFiNotEnabled` coincide con lo medido: el ipad no reporta wi-fi disponible para sidecar.
+5. **restablecer ajustes de red no arregla y rompe el cable.** cambia el comportamiento de los anuncios pero no devuelve `WiFiP2P`, y elimina el camino usb hasta reconstruir la confianza.
+6. **la banda no importa.** falló igual en 5 y en 2.4 ghz.
+
 ## evidencia principal: las banderas que anuncia el ipad
 
 `SidecarRelay` (subsistema `com.apple.sidecar:rapport`) registra las capacidades que cada dispositivo anuncia por bluetooth:
