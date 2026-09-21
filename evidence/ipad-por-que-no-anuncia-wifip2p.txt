@@ -1,0 +1,52 @@
+# lado del ipad: por qué no anuncia WiFiP2P
+# extracto de sus propios registros (ipados 27, 18:44 del 20 de sep a 04:44 del 21 de sep), generado con tools/ipad-why.sh
+# correos, identificadores de cuenta, udid, uuid y direcciones enmascarados
+
+== 1. por qué el ipad no pone el bit (sharingd) ==
+   cada cambio del mensaje 'WiFiP2P bit is not set, ...' (sin repeticiones consecutivas)
+2026-09-20 18:47:40.408 | WiFiP2P bit is not set, WiFi state: Connected, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 00:25:19.317 | WiFiP2P bit is not set, WiFi state: NotConnected, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 00:25:20.001 | WiFiP2P bit is not set, WiFi state: Connected, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 02:43:48.471 | WiFiP2P bit is not set, WiFi state: Off, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 02:43:56.904 | WiFiP2P bit is not set, WiFi state: NotConnected, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 02:43:57.219 | WiFiP2P bit is not set, WiFi state: Connecting, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 02:43:57.329 | WiFiP2P bit is not set, WiFi state: Connected, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 04:10:49.612 | WiFiP2P bit is not set, WiFi state: Unknown, hostAP: NO, NearbyAction scan: off, Manatee: YES
+2026-09-21 04:10:54.889 | WiFiP2P bit is not set, WiFi state: Unknown, hostAP: NO, NearbyAction scan: on, Manatee: YES
+2026-09-21 04:10:58.567 | WiFiP2P bit is not set, WiFi state: Connected, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 04:40:04.324 | WiFiP2P bit is not set, WiFi state: NotConnected, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 04:40:07.060 | WiFiP2P bit is not set, WiFi state: Connecting, hostAP: NO, NearbyAction scan: on, Manatee: NO
+2026-09-21 04:40:07.299 | WiFiP2P bit is not set, WiFi state: Connected, hostAP: NO, NearbyAction scan: on, Manatee: NO
+
+== 2. banderas de error de rapportd (NoManatee) ==
+2026-09-21 02:43:48.436  0x100 < NoManatee > -> 0x104 < WiFiOff NoManatee >
+2026-09-21 02:43:56.881  0x104 < WiFiOff NoManatee > -> 0x100 < NoManatee >
+2026-09-21 03:06:40.142  0x100 < NoManatee > -> 0x0 < >
+2026-09-21 04:10:09.419  0x0 < > -> 0x100 < NoManatee >
+2026-09-21 04:10:14.847  0x100 < NoManatee > -> 0x0 < >
+
+== 3. disponibilidad de Manatee (solo cambios de estado) ==
+2026-09-20 18:46:30.183 rapportd CDPManateeStateController: Manatee not available due to circle failure with error: Error Domain=CDPStateError Code=-5403 "(null)"
+2026-09-21 03:06:40.119 sharingd Manatee is available
+2026-09-21 04:10:38.027 cdpd CDPManateeStateController: Manatee not available due to circle failure with error: Error Domain=CDPStateError Code=-5403 "(null)"
+
+== 4. confianza de la cuenta en el iPad (securityd / octagon): solo cambios de estado ==
+2026-09-20 23:00:31.649 UNTRUSTED
+2026-09-21 03:06:40.134 TRUSTED
+2026-09-21 04:10:37.720 UNTRUSTED
+
+== 5. ¿estaba pendiente «renovar credenciales»? (cada vez que Ajustes lee sus pendientes, por minuto) ==
+2026-09-21 00:22  RenewCredentials pendiente: SÍ
+2026-09-21 00:25  RenewCredentials pendiente: SÍ
+2026-09-21 02:14  RenewCredentials pendiente: SÍ
+2026-09-21 02:15  RenewCredentials pendiente: SÍ
+2026-09-21 03:06  RenewCredentials pendiente: SÍ
+2026-09-21 03:07  RenewCredentials pendiente: no
+2026-09-21 03:54  RenewCredentials pendiente: no
+2026-09-21 04:06  RenewCredentials pendiente: no
+2026-09-21 04:17  RenewCredentials pendiente: SÍ
+2026-09-21 04:21  RenewCredentials pendiente: SÍ
+2026-09-21 04:22  RenewCredentials pendiente: no
+
+== 6. lo que hizo el iPad justo antes de recuperar Manatee ==
+2026-09-21 03:06:37.407  securityd: New syncing policy (userViews: FOLLOWING, incluye la vista Manatee), y 10 veces más

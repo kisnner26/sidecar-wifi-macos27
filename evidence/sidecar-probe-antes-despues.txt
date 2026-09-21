@@ -1,0 +1,38 @@
+# salidas reales de la herramienta durante la investigación (21 de septiembre de 2026)
+# corresponden a las versiones de trabajo de sidecar-probe; el criterio es el mismo: bit 0x200 de SidecarDevice.status
+# nombres e identificadores enmascarados
+
+== antes: sin el bit ==
+02:45:38  conectando con: <ipad>
+02:45:38  FALLO: SidecarErrorDomain -203 Can’t connect wirelessly because Wi‑Fi is not available on the device. Turn on Wi‑Fi and make sure it is not in use for Personal Hotspot.
+          (el error sale al instante)
+02:46:25  vigilando el estado del iPad. bit 0x200 = WiFiP2P
+02:46:25  status 0x880102 sin WiFiP2P
+
+== el bit aparece ==
+03:08:42  status 0x880302 >>> WiFiP2P PRESENTE: ya puedes conectar
+03:10:09  conectando con: <ipad>
+03:10:11  CONECTADO              (unos 2 s, sin cable)
+
+== reconexión tras cerrar la sesión ==
+03:54:50  estado actual del iPad: 0x880302 (WiFiP2P presente)
+03:54:50  conectando con: <ipad>
+03:54:52  CONECTADO
+
+== tras reiniciar el ipad (macos 27.2 y ipados 27.2, mismas versiones) ==
+04:07:08  el iPad no aparece
+04:10:57  status 0x880102 sin WiFiP2P
+04:14:19  0x880102 SIN WiFiP2P
+          lecturas en 75 s -> presente: 0  ausente: 75
+04:16:10  conectando con: <ipad>
+04:16:10  FALLO: SidecarErrorDomain -203 Can’t connect wirelessly because Wi‑Fi is not available on the device. ...
+
+== con el ipad en 5 ghz (mismo ssid que el mac) ==
+04:25:33  0x880102 SIN WiFiP2P
+          lecturas en 75 s -> presente: 0  ausente: 75
+
+== tras poner la contraseña de la cuenta de apple en el ipad ==
+04:51:42  el ipad anuncia <BLE DuetSync WiFiP2P Owner ApplePay PairingMode LocalDevice MeDeviceIsMe MultiUserDevice>
+04:52:22  === Sidecar Connected <ipad> [AWDL] ===
+04:56:34  estado actual del iPad: 0x880302 (WiFiP2P presente)
+          dispositivos conectados a Sidecar: 1

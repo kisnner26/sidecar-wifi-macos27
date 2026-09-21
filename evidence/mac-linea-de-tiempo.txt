@@ -1,0 +1,32 @@
+# lado del mac: qué anuncia el ipad y qué pasó en cada intento de sidecar
+# ids y nombres enmascarados: IPAD = el ipad, MAC = este macbook
+
+== A. banderas que el ipad anuncia por bluetooth (solo cambios) ==
+2026-09-20 22:52:32.324 <BLE DuetSync Owner ApplePay LocalDevice MeDeviceIsMe >
+2026-09-21 03:06:45.794 <BLE DuetSync WiFiP2P Owner ApplePay LocalDevice MeDeviceIsMe MultiUserDevice >
+2026-09-21 04:10:57.317 <BLE DuetSync Owner ApplePay LocalDevice MeDeviceIsMe >
+2026-09-21 04:14:14.353 <BLE DuetSync Owner ApplePay PairingMode LocalDevice MeDeviceIsMe >
+2026-09-21 04:41:57.110 <BLE iWiFi DuetSync Owner ApplePay USB PairingMode LocalDevice ContextCollector MeDeviceIsMe >
+2026-09-21 04:42:05.393 <BLE DuetSync Owner ApplePay PairingMode LocalDevice MeDeviceIsMe >
+2026-09-21 04:43:04.583 <BLE iWiFi DuetSync Owner ApplePay USB PairingMode LocalDevice ContextCollector MeDeviceIsMe >
+2026-09-21 04:47:05.726 <BLE DuetSync Owner ApplePay PairingMode LocalDevice MeDeviceIsMe >
+2026-09-21 04:51:42.324 <BLE DuetSync WiFiP2P Owner ApplePay PairingMode LocalDevice MeDeviceIsMe MultiUserDevice >
+
+== B. intentos de conectar y su resultado ==
+2026-09-21 02:38:28.654 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 02:40:24.672 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 02:40:29.127 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 02:45:38.857 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 02:49:14.452 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 03:10:11.134 CONECTADO por wi-fi directo [AWDL]
+2026-09-21 03:53:45.402 CONECTADO por wi-fi directo [AWDL]
+2026-09-21 03:54:52.094 CONECTADO por wi-fi directo [AWDL]
+2026-09-21 04:16:10.487 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 04:21:56.525 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 04:30:27.258 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 04:30:35.869 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 04:30:55.329 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 04:31:06.409 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 04:42:16.665 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 04:42:48.467 FALLO  -203 SidecarErrorDeviceWiFiNotEnabled
+2026-09-21 04:52:22.384 CONECTADO por wi-fi directo [AWDL]
