@@ -2,7 +2,7 @@
 
 # sidecar-wifi-macos27
 
-**[english version](README.en.md)**
+**[english version](README.en.md)** · **[writeup en inglés](writeup.md)**
 
 por qué sidecar decía que el wi-fi del ipad no estaba disponible, con el wi-fi perfecto. **resuelto.**
 
