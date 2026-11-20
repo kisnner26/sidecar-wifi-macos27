@@ -26,6 +26,16 @@ on the ipad, finish the apple account prompt:
 
 what does **not** help: toggling wi-fi or bluetooth, restarting, switching wi-fi band, turning off the vpn, charging the ipad, or updating the system.
 
+## if it comes back
+
+it happened again on 20 November 2026 with nothing else changed: `sidecar-probe status` said `SIN WiFiP2P` (no WiFiP2P bit) and the iPad's own logs said `WiFiP2P bit is not set, WiFi state: Connected, … Manatee: NO` together with `Manatee not available … CDPStateError -5403`. the iPad's Wi-Fi was connected. after resetting the iPad's iCloud session, the status flipped to `WiFiP2P presente` and Sidecar worked again. the full diagnosis is three commands: `sidecar-probe status`, `devicectl list devices` for the real UDID, and `ipad-why.sh`.
+
+to get the UDID of the iPad connected by cable:
+
+```bash
+xcrun devicectl device info details --device <identifier from devicectl list devices> | grep UDID
+```
+
 ## the proof
 
 the ipad's bit, measured every second from the mac, against each attempt to connect. every successful connection falls inside a window where the bit is present; every failure falls outside.
